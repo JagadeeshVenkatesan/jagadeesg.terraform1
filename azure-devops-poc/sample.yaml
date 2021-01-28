@@ -1,0 +1,40 @@
+
+trigger:
+  branches:
+    include:
+    - master
+
+    
+pr: none
+
+# pool:
+#   name: aks-pool
+  
+pool: string
+
+variables:
+
+
+- name: PAS1_UAT
+  value: true
+
+- group: pas1_uat_parameters
+
+
+
+Stages:
+- stage: dev
+  displayName: 'development'
+
+  jobs:
+  
+  - deployment: Copy_Files  
+    displayName: Copy Files to Airflow Working Directory
+    environment: 'pas1-dev'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: template.yaml
+            parameters:                              
+              param1: abs

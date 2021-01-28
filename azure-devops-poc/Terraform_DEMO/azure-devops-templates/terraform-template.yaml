@@ -1,0 +1,32 @@
+
+steps:
+
+
+   
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "================"
+      pwd
+      echo "================"
+      ls
+      echo "================"
+
+- task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+  inputs:
+    TemplatePath: 'infra'
+    Arguments: 'init'
+    InstallTerraform: true
+    UseAzureSub: true
+    ConnectedServiceNameSelector: 'ConnectedServiceNameARM'
+    ConnectedServiceNameARM: 'VS-Ent-Dev-02(de7365e2-8329-48fc-8273-4ab1574e6b4b)'
+    ManageState: true
+    SpecifyStorageAccount: true
+    StorageAccountResourceGroup: 'rg-devops-test'
+    StorageAccountRM: 'devopstesthcl'
+    StorageContainerName: 'abc'
+
+
+
